@@ -1,0 +1,14 @@
+---
+- name: provision build
+  hosts: db
+  become: yes
+
+  roles:
+   - buildserver
+
+- name: provision web
+  hosts: web
+  become: yes
+
+  roles:
+   - webserver

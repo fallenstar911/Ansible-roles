@@ -1,0 +1,22 @@
+---
+# tasks file for buildserver
+- name: install maven
+  apt:
+    name:
+     - maven
+     - default-jdk
+    state: present
+
+- name: git clone project
+
+  git:
+    repo: https://github.com/boxfuse/boxfuse-sample-java-war-hello.git
+    dest: /tmp/repos/
+    clone: yes
+    update: yes
+
+- name: build project
+  shell: cd /tmp/repos/ && mvn package
+
+- name: Ensure *.war artifact is present
+  synchronize: mode=pull src=/tmp/repos/target/*.war dest=/tmp/

@@ -1,0 +1,18 @@
+---
+- name: roles conf
+  hosts: web
+  become: yes
+
+  roles:
+    - common
+    - webserver
+    - security
+
+
+- name: roles bd conf
+  hosts: db
+  become: yes
+
+  roles:
+    - common
+    - security
